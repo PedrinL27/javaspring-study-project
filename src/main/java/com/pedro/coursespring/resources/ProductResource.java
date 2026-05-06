@@ -2,8 +2,8 @@ package com.pedro.coursespring.resources;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedro.coursespring.entities.Order;
-import com.pedro.coursespring.services.OrderService;
+import com.pedro.coursespring.entities.Product;
+import com.pedro.coursespring.services.ProductService;
 
 import java.util.List;
 
@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping(value = "/orders")
-public class OrderResource {
+@RequestMapping(value = "/products")
+public class ProductResource {
     
     @Autowired
-    private OrderService service;
+    private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
-        List<Order> list = service.findAll(); 
+    public ResponseEntity<List<Product>> findAll() {
+        List<Product> list = service.findAll(); 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
-        Order obj = service.findById(id);
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
+        Product obj = service.findById(id);
         return ResponseEntity.ok().body(obj); 
     }
 }
