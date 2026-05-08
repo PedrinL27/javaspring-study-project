@@ -3,6 +3,8 @@ package com.pedro.coursespring.resources;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.pedro.coursespring.dto.UserDTO;
+import com.pedro.coursespring.dto.insert.UserInsertDTO;
 import com.pedro.coursespring.entities.User;
 import com.pedro.coursespring.services.UserService;
 
@@ -29,27 +31,27 @@ public class UserResource {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll(); 
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<UserDTO> list = service.findAll(); 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = service.findById(id);
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        UserDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj); 
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj) {
-        obj = service.insert(obj);
+    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO obj) {
+        UserDTO dto = service.insert(obj);
         URI uri = ServletUriComponentsBuilder
         .fromCurrentRequest()
         .path("/{id}")
-        .buildAndExpand(obj.getId())
+        .buildAndExpand(dto.getId())
         .toUri();
 
-        return ResponseEntity.created(uri).body(obj);
+        return ResponseEntity.created(uri).body(dto);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -59,9 +61,9 @@ public class UserResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok(obj);
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserInsertDTO obj) {
+        UserDTO dto = service.update(id, obj);
+        return ResponseEntity.ok(dto);
     }
     
 }
