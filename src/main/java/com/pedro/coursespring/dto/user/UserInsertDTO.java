@@ -1,4 +1,4 @@
-package com.pedro.coursespring.dto.insert;
+package com.pedro.coursespring.dto.user;
 
 import java.io.Serializable;
 

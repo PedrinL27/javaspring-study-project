@@ -1,5 +1,6 @@
 package com.pedro.coursespring.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.pedro.coursespring.dto.product.ProductDTO;
 import com.pedro.coursespring.entities.Product;
 import com.pedro.coursespring.repositories.ProductRepository;
 import com.pedro.coursespring.services.exceptions.DatabaseException;
@@ -20,8 +22,15 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public List<Product> findAll() {
-        return repository.findAll();
+    public List<ProductDTO> findAll() {
+        List<Product> listProduct = repository.findAll();
+        List<ProductDTO> listDTO = new ArrayList<>();
+
+        for (Product product : listProduct) {
+            ProductDTO dto = new ProductDTO(product);
+            listDTO.add(dto);
+        }
+        return listDTO;
     }
 
     public Product findById(Long id) {
@@ -61,4 +70,5 @@ public class ProductService {
         entity.setPrice(obj.getPrice());
         entity.setImgUrl(obj.getImgUrl());
     }
+ 
 }

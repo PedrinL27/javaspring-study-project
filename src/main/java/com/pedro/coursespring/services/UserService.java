@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.pedro.coursespring.dto.UserDTO;
-import com.pedro.coursespring.dto.insert.UserInsertDTO;
+import com.pedro.coursespring.dto.user.UserDTO;
+import com.pedro.coursespring.dto.user.UserInsertDTO;
 import com.pedro.coursespring.entities.User;
 import com.pedro.coursespring.repositories.UserRepository;
 import com.pedro.coursespring.services.exceptions.DatabaseException;

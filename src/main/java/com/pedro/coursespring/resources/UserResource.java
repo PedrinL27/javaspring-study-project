@@ -3,9 +3,8 @@ package com.pedro.coursespring.resources;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.pedro.coursespring.dto.UserDTO;
-import com.pedro.coursespring.dto.insert.UserInsertDTO;
-import com.pedro.coursespring.entities.User;
+import com.pedro.coursespring.dto.user.UserDTO;
+import com.pedro.coursespring.dto.user.UserInsertDTO;
 import com.pedro.coursespring.services.UserService;
 
 import java.net.URI;

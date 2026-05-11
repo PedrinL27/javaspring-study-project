@@ -3,6 +3,7 @@ package com.pedro.coursespring.resources;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.pedro.coursespring.dto.product.ProductDTO;
 import com.pedro.coursespring.entities.Product;
 import com.pedro.coursespring.services.ProductService;
 
@@ -29,8 +30,8 @@ public class ProductResource {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        List<Product> list = service.findAll(); 
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        List<ProductDTO> list = service.findAll(); 
         return ResponseEntity.ok().body(list);
     }
 
