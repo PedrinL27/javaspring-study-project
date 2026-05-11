@@ -2,7 +2,6 @@ package com.pedro.coursespring.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -33,13 +32,23 @@ public class ProductService {
         return listDTO;
     }
 
-    public Product findById(Long id) {
-        Optional<Product> obj = repository.findById(id);
-        return obj.get();
+    public ProductDTO findById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException(id);
+        }
+
+        Product product = repository.findById(id).get();
+        ProductDTO dto = new ProductDTO(product); 
+        return dto;
     }
 
-    public Product insert(Product obj) {
-        return repository.save(obj);
+    public ProductDTO insert(ProductDTO obj) {
+        Product product = new Product();
+
+        updateData(product, obj);
+        product = repository.save(product);
+
+        return new ProductDTO(product);
     }
 
     public void delete(Long id) {
@@ -54,17 +63,19 @@ public class ProductService {
         }
     }
 
-    public Product update(Long id, Product obj) {
+    public ProductDTO update(Long id, ProductDTO obj) {
         try {
-            Product entity = repository.getReferenceById(id);
-            updateData(entity, obj);
-            return repository.save(entity);
+            Product product = repository.getReferenceById(id);
+            updateData(product, obj);
+            repository.save(product);
+
+            return new ProductDTO(product);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    private void updateData(Product entity, Product obj) {
+    private void updateData(Product entity, ProductDTO obj) {
         entity.setName(obj.getName());
         entity.setDescription(obj.getDescription());
         entity.setPrice(obj.getPrice());

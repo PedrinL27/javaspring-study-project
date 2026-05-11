@@ -2,7 +2,7 @@ package com.pedro.coursespring.resources;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pedro.coursespring.entities.Category;
+import com.pedro.coursespring.dto.category.CategoryDTO;
 import com.pedro.coursespring.services.CategoryService;
 
 import java.util.List;
@@ -21,14 +21,14 @@ public class CategoryResource {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = service.findAll(); 
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> list = service.findAll(); 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id) {
-        Category obj = service.findById(id);
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+        CategoryDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj); 
     }
 }

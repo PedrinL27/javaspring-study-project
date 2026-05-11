@@ -1,8 +1,11 @@
 package com.pedro.coursespring.dto.product;
 
+import java.io.Serializable;
+
 import com.pedro.coursespring.entities.Product;
 
-public class ProductMinDTO {
+public class ProductMinDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String name;

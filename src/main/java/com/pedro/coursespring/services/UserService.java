@@ -46,11 +46,7 @@ public class UserService {
     public UserDTO insert(UserInsertDTO obj) {
         User user = new User();
 
-        user.setName(obj.getName());
-        user.setEmail(obj.getEmail());
-        user.setPhone(obj.getPhone());
-        user.setPassword(obj.getPassword());
-
+        updateData(user, obj);
         user = repository.save(user);
 
         return new UserDTO(user);
@@ -70,12 +66,11 @@ public class UserService {
 
     public UserDTO update(Long id, UserInsertDTO obj) {
         try {
-            User entity = repository.getReferenceById(id);
-            updateData(entity, obj);
-            repository.save(entity);
-            UserDTO dto = new UserDTO(entity);
+            User user = repository.getReferenceById(id);
+            updateData(user, obj);
+            repository.save(user);
             
-            return dto;
+            return new UserDTO(user);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
@@ -85,5 +80,9 @@ public class UserService {
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
         entity.setPhone(obj.getPhone());
+
+        if (obj.getPassword() != null) {
+            entity.setPassword(obj.getPassword());
+        }
     }
 }

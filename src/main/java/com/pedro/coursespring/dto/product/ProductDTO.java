@@ -8,8 +8,9 @@ import com.pedro.coursespring.entities.Category;
 import com.pedro.coursespring.entities.Product;
 
 public class ProductDTO extends ProductMinDTO {
+    private static final long serialVersionUID = 1L;
 
-    Set<CategoryMinDTO> categories = new HashSet<>();
+    private Set<CategoryMinDTO> categories = new HashSet<>();
 
     public ProductDTO() {
     }
